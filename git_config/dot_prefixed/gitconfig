@@ -1,0 +1,28 @@
+[color]
+    ui = auto
+[log]
+    date = local
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[merge]
+    tool = meld
+[push]
+	default = current
+[alias]
+    ci = commit
+    st = status
+    co = checkout
+    br = branch
+    up = merge --ff-only @{u}
+    unstage = reset HEAD --
+    l = "!git --no-pager lg -10; echo"
+    lg =               log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+    lg-local-commits = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative @{upstream}..
+    lg-unmerged-commits = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative HEAD..origin/master
+    lg-local-commits-for-all-branches = log --branches --not --remotes --simplify-by-decoration --decorate --oneline
+    diff-local = diff origin/HEAD
+    meld = difftool --dir-diff
+[branch]
+    autosetuprebase = always
