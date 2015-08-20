@@ -41,6 +41,12 @@ if [[ -f ~/.gitconfig ]]; then
     rm ~/.gitconfig
 fi
 
+echo "Installing git"
+installState=$( dpkg -s git | grep Status )
+if [[ ! "$installState" == "Status: install ok installed" ]]; then
+    sudo apt-get install git
+fi
+
 # Install tmux conf
 echo "Installing gitconfig ..."
 cp dot_prefixed/gitconfig ~/.gitconfig
