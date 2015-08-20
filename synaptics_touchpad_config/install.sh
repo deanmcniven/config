@@ -11,7 +11,10 @@ if [[ -f ~/.synaptics-custom-settings.sh ]]; then
 fi
 
 echo "Installing deps ..."
-sudo apt-get install xserver-xorg-input-synaptics
+installState=$( dpkg -s xserver-xorg-input-synaptics | grep Status )
+if [[ ! "$installState" == "Status: install ok installed" ]]; then
+    sudo apt-get install xserver-xorg-input-synaptics
+fi
 
 echo "Installing script ..."
 mkdir -p ~/.config/autostart
