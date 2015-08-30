@@ -19,4 +19,11 @@ echo "Installing tmux.conf ..."
 cp dot_prefixed/tmux.conf ~/.tmux.conf
 chmod 777 ~/.tmux.conf
 
+echo "Setting tmux keyboard shortcut ..."
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal ''
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name 'tmux'
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "gnome-terminal -e 'tmux'"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding '<Primary><Alt>t'
+
 echo "Done"
