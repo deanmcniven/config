@@ -20,4 +20,7 @@ sudo apt-get install --assume-yes git
 echo "Dia"
 sudo apt-get install --assume-yes dia
 
+echo "Ruby"
+sudo apt-get install --assume-yes ruby
+
 echo "Done"
