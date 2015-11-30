@@ -9,7 +9,9 @@ if [[ -f ~/.tmux.conf ]]; then
 fi
 
 echo "Installing tmux"
+set +e
 installState=$( dpkg -s tmux | grep Status )
+set -e
 if [[ ! "$installState" == "Status: install ok installed" ]]; then
     sudo apt-get install tmux
 fi
