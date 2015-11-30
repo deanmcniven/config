@@ -12,9 +12,17 @@ if [[ -d ~/.vim ]]; then
 fi
 
 echo "Installing deps ..."
+set +e
 installState=$( dpkg -s vim | grep Status )
+set -e
 if [[ ! "$installState" == "Status: install ok installed" ]]; then
     sudo apt-get install vim
+fi
+set +e
+installState=$( dpkg -s curl | grep Status )
+set -e
+if [[ ! "$installState" == "Status: install ok installed" ]]; then
+    sudo apt-get install curl
 fi
 
 echo "Installing Pathogen ..."
