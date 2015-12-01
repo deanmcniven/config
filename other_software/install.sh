@@ -23,4 +23,7 @@ sudo apt-get install --assume-yes dia
 echo "Ruby"
 sudo apt-get install --assume-yes ruby
 
+echo "Maven"
+sudo apt-get install --assume-yes maven
+
 echo "Done"
