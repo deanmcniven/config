@@ -26,3 +26,5 @@
     meld = difftool --dir-diff
 [branch]
     autosetuprebase = always
+[core]
+    editor = vim
