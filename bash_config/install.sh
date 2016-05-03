@@ -8,7 +8,7 @@ if [[ -f ~/.bash_aliases ]]; then
     rm ~/.bash_aliases
 fi
 
-# Install tmux conf
+# Install Bash Aliases
 echo "Installing bash_aliases ..."
 cp dot_prefixed/bash_aliases ~/.bash_aliases
 chmod 777 ~/.bash_aliases
