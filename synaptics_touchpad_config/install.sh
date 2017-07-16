@@ -2,32 +2,28 @@
 
 set -e
 
-echo "Cleanup old installations (if any) ..."
-if [[ -f ~/.config/autostart/.synaptics-custom-settings.sh.desktop ]]; then
-    rm ~/.config/autostart/.synaptics-custom-settings.sh.desktop
+if [[ `whoami` != "root" ]]; then
+    echo "Script must be run as root!"
+    sudo $0
+    exit 0
 fi
-if [[ -f ~/.synaptics-custom-settings.sh ]]; then
-    rm ~/.synaptics-custom-settings.sh
+
+echo "Cleanup old installations (if any) ..."
+if [[ -f /etc/profile.d/synaptics-custom-settings.sh ]]; then
+    rm /etc/profile.d/synaptics-custom-settings.sh
 fi
 
 echo "Installing deps ..."
-installState=$( dpkg -s xserver-xorg-input-synaptics | grep Status )
+installState=$( dpkg -s xserver-xorg-input-synaptics-hwe-16.04 | grep Status )
 if [[ ! "$installState" == "Status: install ok installed" ]]; then
-    sudo apt-get install xserver-xorg-input-synaptics
+    apt-get install xserver-xorg-input-synaptics-hwe-16.04
 fi
 
 echo "Installing script ..."
-mkdir -p ~/.config/autostart
-cp dot_prefixed/synaptics-custom-settings.sh.desktop ~/.config/autostart/.synaptics-custom-settings.sh.desktop
-cp dot_prefixed/synaptics-custom-settings.sh ~/.synaptics-custom-settings.sh
-chmod 775 ~/.synaptics-custom-settings.sh
-chmod 664 ~/.config/autostart/.synaptics-custom-settings.sh.desktop
-
-echo "Configuring script ..."
-homeDir=$( echo ~ )
-sed -i "s#Exec=#Exec=$homeDir/.synaptics-custom-settings.sh#g" ~/.config/autostart/.synaptics-custom-settings.sh.desktop
+cp files/synaptics-custom-settings.sh /etc/profile.d/synaptics-custom-settings.sh
+chmod 755 /etc/profile.d/synaptics-custom-settings.sh
 
 echo "Running script ..."
-/bin/bash ~/.synaptics-custom-settings.sh
+/bin/bash /etc/profile.d/synaptics-custom-settings.sh
 
 echo "Done"
